@@ -19,7 +19,7 @@ while True:
         rando = generate_rando(start_val, end_val)
         print(f"Your Unique Random Number: {rando}")
     else:
-        print("\n***** Invalid Entry. Range interval must be greater than or equal to 1 *****")
+        print("\n***** Invalid Entry. Range interval must be greater than 1 *****")
     
     play_again = input("\nWould you like to play again? (y/n): ").strip().lower()
     if play_again != 'y':
