@@ -45,11 +45,10 @@ for mu in mu_values:
         sequence.append(x)
     
     period = find_period(sequence)
-    if period is None:  # Assuming None indicates chaos
+    if period is None: 
         chaotic_mu_values.append(mu)
         chaotic_sequences.append(sequence)
 
-# Analysis
 print(f"The following is a sample of the statistics for chaotic sequences of the tent map.\nSample underwent {iterations} iterations with a value of x = 0.5")
 sampled_indices = np.linspace(0, len(chaotic_mu_values) - 1, 20, dtype=int)
 for index in sampled_indices:
