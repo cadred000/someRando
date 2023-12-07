@@ -1,36 +1,27 @@
 import numpy as np
-from decimal import Decimal, ROUND_HALF_UP
 import datetime
 
-count = 0
-
 def tent_map(mu, x):
-    return mu * min(x, Decimal('1') - x)
+    return mu * min(x, 1 - x)
+    
 
-def generate_rando(start, end, count, mu=Decimal('1.95')):
-    x = Decimal('0.5')
-    iterations = 99997 * (datetime.datetime.now().minute) + count
+def generate_rando():
+    ms = datetime.datetime.now().microsecond
+    x = max((0.5 * ms) % 1, 0.000001)
+    iterations = 200 * max(datetime.datetime.now().second, 1)
     for _ in range(iterations):
-        x = tent_map(mu, x)
+        x = tent_map(1.95, x) 
 
-    normalized = start + x * (end - start)
-    rounded = normalized.quantize(Decimal('1'), rounding=ROUND_HALF_UP)
-    return rounded
+    return x
 
 print("\n******** Welcome to my Pseudo-Random Number Generator! ********\n")
-print("This program generates a unique random number within a given range.")
+print("This program generates a unique random number on [0, 1).\n")
+
 while True:
-    start_val = int(input("\nEnter an integer value to start the range: "))
-    end_val = int(input("Enter an integer value to end the range: "))
+    rando = generate_rando()
+    print(f"Your Unique Random Number: {rando}")
 
-    if np.abs(end_val - start_val) >= 2:
-        rando = generate_rando(start_val, end_val, count)
-        count += 1
-        print(f"Your Unique Random Number: {rando}")
-    else:
-        print("\n***** Invalid Entry. Range interval must be greater than 1 *****")
-
-    play_again = input("\nWould you like to play again? (y/n): ").strip().lower()
+    play_again = input("\nWould you like another number? (y/n): ").strip().lower()
     if play_again != 'y':
         break
 
